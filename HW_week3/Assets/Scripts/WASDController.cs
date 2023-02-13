@@ -38,6 +38,10 @@ public class WASDController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.right*forceAmount);
         }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+        }
         rb2d.velocity *= 0.999f;
     }
 }

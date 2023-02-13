@@ -49,9 +49,9 @@ public class CollisionScript : MonoBehaviour
             
             
             
-            GetComponent <ParticleSystem>().Play (); //spawn the particle system! 
-            ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
-            em.enabled = true;
+          //  GetComponent <ParticleSystem>().Play (); //spawn the particle system! 
+          //  ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
+          //  em.enabled = true;
 
         }
     }
