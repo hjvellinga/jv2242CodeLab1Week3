@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro; 
 using System.IO;
+using System.Net.Mime;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 using Application = UnityEngine.Device.Application;
 
 public class GameManager : MonoBehaviour
@@ -35,6 +39,9 @@ public class GameManager : MonoBehaviour
     public const string PREF_HIGH_SCORE = "hsScore;"; //in order to avoid making mistakes when writing multiple strings, you can set a Constant Variable, like this one (const)
     //when making a const variable, write identifier first and THEN specifications
     
+    //WEEK 4
+    public TextMeshProUGUI scoreText; 
+    
     public int Score
     {
         get { return score; }
@@ -59,7 +66,7 @@ public class GameManager : MonoBehaviour
         {
             highScore = value;
             Debug.Log(message: "NEW HIGH SCORE");
-            Directory.CreateDirectory(path: Application.dataPath + DIR_DATA); 
+            Directory.CreateDirectory(Application.dataPath + DIR_DATA); 
             //SAVE HS HERE: now we're creating a space for STORAGE of small data chunks between plays --
             //DATA PERSISTENCE by using Player Preferences. Can only save 3 types of things - strings, integers and floats
             File.WriteAllText(PATH_HIGH_SCORE, "" + highScore); //don't forget to refresh unity files when you make changes in the file system through code;
@@ -87,7 +94,11 @@ public class GameManager : MonoBehaviour
         
        //WEEK 3
         PATH_HIGH_SCORE = Application.dataPath + DIR_DATA + FILE_HIGH_SCORE; //takes us to assets folder + to the specific folder + to the file
-        HighScore = Int32.Parse(File.ReadAllText(PATH_HIGH_SCORE)); //Int32.Parse changes INT into string
+
+        if (File.Exists(PATH_HIGH_SCORE))
+        {
+            HighScore = Int32.Parse(File.ReadAllText(PATH_HIGH_SCORE)); //Int32.Parse changes INT into string
+        }
     }
 
     // Update is called once per frame
@@ -103,7 +114,10 @@ public class GameManager : MonoBehaviour
 
         }
         
-        //WEEK 3
+        //WEEK 4
+        scoreText.text = 
+            "score: " + score + "\n" +
+            "high score: " + HighScore;
         
 
     }
